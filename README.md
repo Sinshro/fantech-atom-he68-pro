@@ -58,6 +58,8 @@ cannot intercept commands sent by a separate official-software process.
 
 ## SignalRGB
 
+![Fantech Atom HE68 PRO in SignalRGB](docs/images/signalrgb-device-card.png)
+
 Copy the plugin matching the active connection into
 `%USERPROFILE%\Documents\WhirlwindFX\Plugins`, then fully restart SignalRGB:
 
