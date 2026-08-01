@@ -1,0 +1,17 @@
+{
+  "category": "performance",
+  "feature": "game_mode",
+  "capture_name": "game_mode",
+  "timestamp": "2026-07-31T21:16:48.244305+00:00",
+  "firmware": "unknown",
+  "website": "he68pro.driveall.cn",
+  "verified": true,
+  "validation_warnings": [
+    "No ACK observed.",
+    "Expected one request; observed 19.",
+    "Expected one device response; observed 0."
+  ],
+  "verification": "User confirmed Game Mode replay works on the keyboard.",
+  "source_recording": "lighting\\gaamer].json",
+  "source_packet_range": "1-19"
+}

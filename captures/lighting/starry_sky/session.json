@@ -1,0 +1,15 @@
+{
+  "format": "fantech_he68.capture.v1",
+  "session_id": "5d2fae5e-5aa9-4d26-bbc3-ca5c78380e58",
+  "label": "starry_sky",
+  "started_at": "2026-07-31T20:50:53.566858+00:00",
+  "packets": [
+    {
+      "sequence": 0,
+      "direction": "host_to_device",
+      "payload_hex": "AA2310000000010004FFFFFFFF000000010504000000AA5500000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "timestamp": "2026-07-31T20:50:53.566865+00:00",
+      "paired_sequence": null
+    }
+  ]
+}

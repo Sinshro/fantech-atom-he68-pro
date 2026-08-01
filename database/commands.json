@@ -1,0 +1,10 @@
+[
+  {
+    "name": "Static Color",
+    "category": "lighting",
+    "command": "23",
+    "subcommand": "10",
+    "verified": true,
+    "captures": ["captures/lighting/static_red"]
+  }
+]

@@ -1,0 +1,22 @@
+{
+  "format": "fantech_he68.capture.v1",
+  "session_id": "37d7b4ea-f857-44f0-a6cc-5b1e9fe4a27c",
+  "label": "stability_mode_off",
+  "started_at": "2026-07-31T21:36:33.462831+00:00",
+  "packets": [
+    {
+      "sequence": 0,
+      "direction": "host_to_device",
+      "payload_hex": "AA213800000001000000000300060000000000010000010000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "timestamp": "2026-07-31T21:36:33.462837+00:00",
+      "paired_sequence": null
+    },
+    {
+      "sequence": 1,
+      "direction": "host_to_device",
+      "payload_hex": "AA213800000001000000000300060000000000000000010000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "timestamp": "2026-07-31T21:36:33.462840+00:00",
+      "paired_sequence": null
+    }
+  ]
+}

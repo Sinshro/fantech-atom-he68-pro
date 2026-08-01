@@ -1,0 +1,16 @@
+{
+  "category": "settings",
+  "feature": "stability_mode_on",
+  "capture_name": "stability_mode_on",
+  "timestamp": "2026-07-31T21:36:33.449359+00:00",
+  "firmware": "unknown",
+  "website": "he68pro.driveall.cn",
+  "verified": true,
+  "validation_warnings": [
+    "No ACK observed.",
+    "Expected one device response; observed 0."
+  ],
+  "verification": "User confirmed Stability Mode on replay works on the keyboard.",
+  "source_recording": "lighting\\stablity mode on.json",
+  "source_packet_range": "1-1"
+}

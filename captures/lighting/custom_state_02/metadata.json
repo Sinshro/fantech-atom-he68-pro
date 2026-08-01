@@ -1,0 +1,17 @@
+{
+  "category": "lighting",
+  "feature": "custom_state_2",
+  "capture_name": "custom_state_02",
+  "timestamp": "2026-07-31T20:50:53.694879+00:00",
+  "firmware": "unknown",
+  "website": "he68pro.driveall.cn",
+  "verified": true,
+  "validation_warnings": [
+    "No ACK observed.",
+    "Expected one request; observed 10.",
+    "Expected one device response; observed 0."
+  ],
+  "verification": "Replayed successfully through native HID transport with device responses observed.",
+  "source_recording": "lighting\\capture (1).json",
+  "source_packet_range": "11-20"
+}

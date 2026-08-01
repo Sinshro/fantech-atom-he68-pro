@@ -1,0 +1,15 @@
+{
+  "format": "fantech_he68.capture.v1",
+  "session_id": "484c6fe4-f522-4334-a726-f196aeb8b3cb",
+  "label": "snowfall",
+  "started_at": "2026-07-31T20:50:53.573863+00:00",
+  "packets": [
+    {
+      "sequence": 0,
+      "direction": "host_to_device",
+      "payload_hex": "AA2310000000010005FFFFFFFF000000010504000000AA5500000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "timestamp": "2026-07-31T20:50:53.573871+00:00",
+      "paired_sequence": null
+    }
+  ]
+}

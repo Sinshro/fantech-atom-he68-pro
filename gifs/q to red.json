@@ -1,0 +1,226 @@
+{
+  "format": "he68.webhid.capture.v1",
+  "capture_name": "capture",
+  "packets": [
+    {
+      "direction": "host_to_device",
+      "payload_hex": "AA24180000000000000000000100000002000000030000000400000005000000",
+      "timestamp": "2026-07-31T22:19:28.991Z"
+    },
+    {
+      "direction": "host_to_device",
+      "payload_hex": "AA24181800000000060000000700000008000000090000000A0000000B000000",
+      "timestamp": "2026-07-31T22:19:29.018Z"
+    },
+    {
+      "direction": "host_to_device",
+      "payload_hex": "AA241830000000000C0000000D0000000E0000000F0000001000000011001229",
+      "timestamp": "2026-07-31T22:19:29.044Z"
+    },
+    {
+      "direction": "host_to_device",
+      "payload_hex": "AA2418480000000012001229130A1035140A1035150012291600122917001229",
+      "timestamp": "2026-07-31T22:19:29.071Z"
+    },
+    {
+      "direction": "host_to_device",
+      "payload_hex": "AA24186000000000180B0F37190012291A0012291B0012291C0012291D001229",
+      "timestamp": "2026-07-31T22:19:29.098Z"
+    },
+    {
+      "direction": "host_to_device",
+      "payload_hex": "AA241878000000001E0012291F0012292000122921FFFFFF22180E34230A1035",
+      "timestamp": "2026-07-31T22:19:29.125Z"
+    },
+    {
+      "direction": "host_to_device",
+      "payload_hex": "AA241890000000002400122925001229260012292705112F2800122929001229",
+      "timestamp": "2026-07-31T22:19:29.151Z"
+    },
+    {
+      "direction": "host_to_device",
+      "payload_hex": "AA2418A8000000002A0012292B0012292C0012292D0012292E0012292F000000",
+      "timestamp": "2026-07-31T22:19:29.178Z"
+    },
+    {
+      "direction": "host_to_device",
+      "payload_hex": "AA2418C000000000300A10353100122932180E33330012293400122935001229",
+      "timestamp": "2026-07-31T22:19:29.204Z"
+    },
+    {
+      "direction": "host_to_device",
+      "payload_hex": "AA2418D800000000360012293700122938001229390012293A0012293B001229",
+      "timestamp": "2026-07-31T22:19:29.231Z"
+    },
+    {
+      "direction": "host_to_device",
+      "payload_hex": "AA2418F0000000003C0012293D0012293E0000003F0000004018112F411D0D3A",
+      "timestamp": "2026-07-31T22:19:29.258Z"
+    },
+    {
+      "direction": "host_to_device",
+      "payload_hex": "AA24180801000000421010294308112844001229450012294600122947808994",
+      "timestamp": "2026-07-31T22:19:29.284Z"
+    },
+    {
+      "direction": "host_to_device",
+      "payload_hex": "AA2418200100000048001229490012294A0012294B0012294C0012294D001229",
+      "timestamp": "2026-07-31T22:19:29.311Z"
+    },
+    {
+      "direction": "host_to_device",
+      "payload_hex": "AA241838010000004E0000004F00000050001229510012295200122953001229",
+      "timestamp": "2026-07-31T22:19:29.337Z"
+    },
+    {
+      "direction": "host_to_device",
+      "payload_hex": "AA2418500100000054001229550012295605112E570012295800122959001229",
+      "timestamp": "2026-07-31T22:19:29.364Z"
+    },
+    {
+      "direction": "host_to_device",
+      "payload_hex": "AA241868010000005A0000005B0000005C0000005D0000005E0000005F000000",
+      "timestamp": "2026-07-31T22:19:29.391Z"
+    },
+    {
+      "direction": "host_to_device",
+      "payload_hex": "AA24188001000000600000006100000062000000630000006400000065000000",
+      "timestamp": "2026-07-31T22:19:29.416Z"
+    },
+    {
+      "direction": "host_to_device",
+      "payload_hex": "AA24189801000000660000006700000068000000690000006A0000006B000000",
+      "timestamp": "2026-07-31T22:19:29.442Z"
+    },
+    {
+      "direction": "host_to_device",
+      "payload_hex": "AA2418B0010000006C0000006D0000006E0000006F0000007000000071000000",
+      "timestamp": "2026-07-31T22:19:29.469Z"
+    },
+    {
+      "direction": "host_to_device",
+      "payload_hex": "AA2418C801000000720000007300000074000000750000007600000077000000",
+      "timestamp": "2026-07-31T22:19:29.495Z"
+    },
+    {
+      "direction": "host_to_device",
+      "payload_hex": "AA2418E00100000078000000790000007A0000007B0000007C0000007D000000",
+      "timestamp": "2026-07-31T22:19:29.521Z"
+    },
+    {
+      "direction": "host_to_device",
+      "payload_hex": "AA2408F8010001007E0000007F00000000000000000000000000000000000000",
+      "timestamp": "2026-07-31T22:19:29.547Z"
+    },
+    {
+      "direction": "host_to_device",
+      "payload_hex": "AA24180000000000000000000100000002000000030000000400000005000000",
+      "timestamp": "2026-07-31T22:19:34.000Z"
+    },
+    {
+      "direction": "host_to_device",
+      "payload_hex": "AA24181800000000060000000700000008000000090000000A0000000B000000",
+      "timestamp": "2026-07-31T22:19:34.026Z"
+    },
+    {
+      "direction": "host_to_device",
+      "payload_hex": "AA241830000000000C0000000D0000000E0000000F0000001000000011001229",
+      "timestamp": "2026-07-31T22:19:34.053Z"
+    },
+    {
+      "direction": "host_to_device",
+      "payload_hex": "AA2418480000000012001229130A1035140A1035150012291600122917001229",
+      "timestamp": "2026-07-31T22:19:34.079Z"
+    },
+    {
+      "direction": "host_to_device",
+      "payload_hex": "AA24186000000000180B0F37190012291A0012291B0012291C0012291D001229",
+      "timestamp": "2026-07-31T22:19:34.105Z"
+    },
+    {
+      "direction": "host_to_device",
+      "payload_hex": "AA241878000000001E0012291F0012292000122921FF0D0022180E34230A1035",
+      "timestamp": "2026-07-31T22:19:34.131Z"
+    },
+    {
+      "direction": "host_to_device",
+      "payload_hex": "AA241890000000002400122925001229260012292705112F2800122929001229",
+      "timestamp": "2026-07-31T22:19:34.158Z"
+    },
+    {
+      "direction": "host_to_device",
+      "payload_hex": "AA2418A8000000002A0012292B0012292C0012292D0012292E0012292F000000",
+      "timestamp": "2026-07-31T22:19:34.184Z"
+    },
+    {
+      "direction": "host_to_device",
+      "payload_hex": "AA2418C000000000300A10353100122932180E33330012293400122935001229",
+      "timestamp": "2026-07-31T22:19:34.210Z"
+    },
+    {
+      "direction": "host_to_device",
+      "payload_hex": "AA2418D800000000360012293700122938001229390012293A0012293B001229",
+      "timestamp": "2026-07-31T22:19:34.236Z"
+    },
+    {
+      "direction": "host_to_device",
+      "payload_hex": "AA2418F0000000003C0012293D0012293E0000003F0000004018112F411D0D3A",
+      "timestamp": "2026-07-31T22:19:34.263Z"
+    },
+    {
+      "direction": "host_to_device",
+      "payload_hex": "AA24180801000000421010294308112844001229450012294600122947808994",
+      "timestamp": "2026-07-31T22:19:34.289Z"
+    },
+    {
+      "direction": "host_to_device",
+      "payload_hex": "AA2418200100000048001229490012294A0012294B0012294C0012294D001229",
+      "timestamp": "2026-07-31T22:19:34.315Z"
+    },
+    {
+      "direction": "host_to_device",
+      "payload_hex": "AA241838010000004E0000004F00000050001229510012295200122953001229",
+      "timestamp": "2026-07-31T22:19:34.342Z"
+    },
+    {
+      "direction": "host_to_device",
+      "payload_hex": "AA2418500100000054001229550012295605112E570012295800122959001229",
+      "timestamp": "2026-07-31T22:19:34.370Z"
+    },
+    {
+      "direction": "host_to_device",
+      "payload_hex": "AA241868010000005A0000005B0000005C0000005D0000005E0000005F000000",
+      "timestamp": "2026-07-31T22:19:34.397Z"
+    },
+    {
+      "direction": "host_to_device",
+      "payload_hex": "AA24188001000000600000006100000062000000630000006400000065000000",
+      "timestamp": "2026-07-31T22:19:34.424Z"
+    },
+    {
+      "direction": "host_to_device",
+      "payload_hex": "AA24189801000000660000006700000068000000690000006A0000006B000000",
+      "timestamp": "2026-07-31T22:19:34.450Z"
+    },
+    {
+      "direction": "host_to_device",
+      "payload_hex": "AA2418B0010000006C0000006D0000006E0000006F0000007000000071000000",
+      "timestamp": "2026-07-31T22:19:34.476Z"
+    },
+    {
+      "direction": "host_to_device",
+      "payload_hex": "AA2418C801000000720000007300000074000000750000007600000077000000",
+      "timestamp": "2026-07-31T22:19:34.503Z"
+    },
+    {
+      "direction": "host_to_device",
+      "payload_hex": "AA2418E00100000078000000790000007A0000007B0000007C0000007D000000",
+      "timestamp": "2026-07-31T22:19:34.530Z"
+    },
+    {
+      "direction": "host_to_device",
+      "payload_hex": "AA2408F8010001007E0000007F00000000000000000000000000000000000000",
+      "timestamp": "2026-07-31T22:19:34.557Z"
+    }
+  ]
+}

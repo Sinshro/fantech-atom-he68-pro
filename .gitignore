@@ -1,0 +1,36 @@
+# Python tooling
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+.venv/
+venv/
+
+# Local editor and operating-system files
+.vscode/
+.idea/
+*.swp
+Thumbs.db
+Desktop.ini
+
+# Generated captures and local recordings can be large and may contain device-specific state.
+captures/sessions/
+captures/*.bin
+captures/*.json
+
+# SignalRGB and official-app local state
+signalrgb/*.log
+
+# Local copies of the official web application, kept only for private protocol research.
+layout-classic-*.js
+lighting-*.js
+vendor-*.js
+main.js
+Microsoft.Services.Store.winmd
+
+# User-supplied demo media is not required to run the toolkit.
+gifs/*.gif
+
+# Downloaded manuals and rendered research scratch files.
+tmp/

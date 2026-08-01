@@ -1,0 +1,11 @@
+{
+  "format": "he68.webhid.capture.v1",
+  "capture_name": "capture",
+  "packets": [
+    {
+      "direction": "host_to_device",
+      "payload_hex": "AA2310000000010001FF00FFFF000000000404000000AA5500000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "timestamp": "2026-07-31T21:43:19.229Z"
+    }
+  ]
+}

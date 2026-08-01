@@ -1,0 +1,16 @@
+{
+  "category": "settings",
+  "feature": "1k_return_rate",
+  "capture_name": "return_rate_1k",
+  "timestamp": "2026-07-31T21:40:38.923631+00:00",
+  "firmware": "unknown",
+  "website": "he68pro.driveall.cn",
+  "verified": true,
+  "validation_warnings": [
+    "No ACK observed.",
+    "Expected one device response; observed 0."
+  ],
+  "verification": "User confirmed 1K Return Rate replay works after the expected USB reconnection.",
+  "source_recording": "lighting\\1k.json",
+  "source_packet_range": "1"
+}

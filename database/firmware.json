@@ -1,0 +1,9 @@
+{
+  "known_firmware": [
+    {
+      "version": "unknown",
+      "captures": ["captures/lighting/static_red"],
+      "note": "Firmware version was not supplied with the initial verified capture."
+    }
+  ]
+}

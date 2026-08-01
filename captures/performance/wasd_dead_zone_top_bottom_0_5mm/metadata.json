@@ -1,0 +1,17 @@
+{
+  "category": "performance",
+  "feature": "dead_zone_top_and_bottom_0_5_mm",
+  "capture_name": "wasd_dead_zone_top_bottom_0_5mm",
+  "timestamp": "2026-07-31T21:19:58.716625+00:00",
+  "firmware": "unknown",
+  "website": "he68pro.driveall.cn",
+  "verified": true,
+  "validation_warnings": [
+    "No ACK observed.",
+    "Expected one request; observed 3.",
+    "Expected one device response; observed 0."
+  ],
+  "verification": "User confirmed replay works on the keyboard. Scope is unknown: this capture is not confirmed to be WASD-only.",
+  "source_recording": "lighting\\bottom dead zone 0.5.json",
+  "source_packet_range": "1-3"
+}

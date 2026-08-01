@@ -1,0 +1,13 @@
+{
+  "category": "lighting",
+  "feature": "static_bright",
+  "capture_name": "static_bright",
+  "timestamp": "2026-07-31T20:39:46.295390+00:00",
+  "firmware": "unknown",
+  "website": "he68pro.driveall.cn",
+  "verified": true,
+  "validation_warnings": [
+    "No ACK observed.",
+    "Expected one device response; observed 0."
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "category": "performance",
+  "feature": "wasd_trigger_distance_2_00_mm",
+  "capture_name": "wasd_trigger_distance_2mm",
+  "timestamp": "2026-07-31T21:03:21.332162+00:00",
+  "firmware": "unknown",
+  "website": "he68pro.driveall.cn",
+  "verified": true,
+  "validation_warnings": [
+    "No ACK observed.",
+    "Expected one request; observed 19.",
+    "Expected one device response; observed 0."
+  ],
+  "verification": "User confirmed the replayed WASD configuration requires a deeper press than Q.",
+  "source_recording": "lighting\\capture (4).json",
+  "source_packet_range": "58-76"
+}

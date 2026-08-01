@@ -1,0 +1,17 @@
+{
+  "category": "performance",
+  "feature": "wasd_fast_trigger_on",
+  "capture_name": "wasd_fast_trigger_on",
+  "timestamp": "2026-07-31T21:07:42.546218+00:00",
+  "firmware": "unknown",
+  "website": "he68pro.driveall.cn",
+  "verified": false,
+  "validation_warnings": [
+    "No ACK observed.",
+    "Expected one request; observed 19.",
+    "Expected one device response; observed 0."
+  ],
+  "verification": "Transport replay completed, but the web interface resets to its default display after refresh and cannot verify hardware state.",
+  "source_recording": "lighting\\fasst triggeer.json",
+  "source_packet_range": "58-76"
+}

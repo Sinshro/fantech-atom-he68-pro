@@ -1,0 +1,17 @@
+{
+  "category": "settings",
+  "feature": "adaptive_dynamic_calibration_on",
+  "capture_name": "adaptive_dynamic_calibration_on",
+  "timestamp": "2026-07-31T21:38:08.640204+00:00",
+  "firmware": "unknown",
+  "website": "he68pro.driveall.cn",
+  "verified": true,
+  "validation_warnings": [
+    "No ACK observed.",
+    "Expected one request; observed 2.",
+    "Expected one device response; observed 0."
+  ],
+  "verification": "User confirmed Adaptive Dynamic Calibration on replay works on the keyboard.",
+  "source_recording": "lighting\\on.json",
+  "source_packet_range": "1-2"
+}

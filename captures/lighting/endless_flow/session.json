@@ -1,0 +1,15 @@
+{
+  "format": "fantech_he68.capture.v1",
+  "session_id": "2114daf1-e3c8-4304-b20b-f195b0b555fb",
+  "label": "lighting_effect_16",
+  "started_at": "2026-07-31T20:50:53.657039+00:00",
+  "packets": [
+    {
+      "sequence": 0,
+      "direction": "host_to_device",
+      "payload_hex": "AA2310000000010011FFFFFFFF000000010504000000AA5500000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "timestamp": "2026-07-31T20:50:53.657046+00:00",
+      "paired_sequence": null
+    }
+  ]
+}

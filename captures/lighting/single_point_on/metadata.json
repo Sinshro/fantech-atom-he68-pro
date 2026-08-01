@@ -1,0 +1,16 @@
+{
+  "category": "lighting",
+  "feature": "single_point_on",
+  "capture_name": "single_point_on",
+  "timestamp": "2026-07-31T20:41:15.159848+00:00",
+  "firmware": "unknown",
+  "website": "he68pro.driveall.cn",
+  "verified": true,
+  "verification": "Replayed successfully through native HID transport with device responses observed.",
+  "source_recording": "lighting/capture.json",
+  "source_packet_range": "2",
+  "validation_warnings": [
+    "No ACK observed.",
+    "Expected one device response; observed 0."
+  ]
+}
