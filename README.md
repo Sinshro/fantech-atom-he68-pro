@@ -60,6 +60,10 @@ cannot intercept commands sent by a separate official-software process.
 
 ![Fantech Atom HE68 PRO in SignalRGB](docs/images/signalrgb-device-card.png)
 
+For a smaller download containing only the two plugins and a step-by-step setup
+guide, use the standalone
+[Fantech HE68 PRO SignalRGB repository](https://github.com/Sinshro/fantech-he68-pro-signalrgb).
+
 Copy the plugin matching the active connection into
 `%USERPROFILE%\Documents\WhirlwindFX\Plugins`, then fully restart SignalRGB:
 
