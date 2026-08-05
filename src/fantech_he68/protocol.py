@@ -13,6 +13,13 @@ VENDOR_ID = 0x0C45
 PRODUCT_ID = 0x80CB
 USAGE_PAGE = 0xFF68
 
+# Capture-verified 2.4 GHz receiver battery query. The reply is 32 bytes and
+# begins ``55 10 18``; byte 11 is a packed-BCD percentage (for example 0x92).
+WIRELESS_REPORT_LENGTH = 32
+BATTERY_QUERY_PACKET = bytes.fromhex("AA 10 18") + bytes(WIRELESS_REPORT_LENGTH - 3)
+BATTERY_RESPONSE_PREFIX = bytes.fromhex("55 10 18")
+BATTERY_LEVEL_OFFSET = 11
+
 HOST_PREFIX = bytes((0xAA, 0x23, 0x10))
 ACK_PREFIX = bytes((0x55, 0x23, 0x10))
 TERMINATOR = bytes((0xAA, 0x55))
@@ -88,3 +95,20 @@ def build_set_color_packet(
 def is_ack_for(packet: bytes) -> bool:
     """Return whether *packet* begins with the experimentally observed ACK prefix."""
     return len(packet) >= len(ACK_PREFIX) and packet[: len(ACK_PREFIX)] == ACK_PREFIX
+
+
+def decode_battery_percentage(response: bytes) -> int:
+    """Decode the captured 2.4 GHz receiver battery-status response.
+
+    The keyboard reports its level as packed BCD rather than a raw integer, so
+    ``0x92`` represents 92 percent, not 146 percent.
+    """
+    if len(response) != WIRELESS_REPORT_LENGTH:
+        raise ValueError(f"battery response must be exactly {WIRELESS_REPORT_LENGTH} bytes")
+    if not response.startswith(BATTERY_RESPONSE_PREFIX):
+        raise ValueError("battery response must begin with 55 10 18")
+    encoded_level = response[BATTERY_LEVEL_OFFSET]
+    level = ((encoded_level >> 4) * 10) + (encoded_level & 0x0F)
+    if not 0 <= level <= 100:
+        raise ValueError(f"battery response contains an invalid BCD percentage: 0x{encoded_level:02X}")
+    return level

@@ -26,6 +26,13 @@ Q-to-red changes. Reproducing those reports through direct HIDAPI/SignalRGB writ
 is still experimental; the exact receiver session/initialization behavior remains
 unresolved.
 
+### Battery status
+
+The receiver accepts a 32-byte `AA 10 18` request (the remaining 29 bytes are
+zero). Its 32-byte `55 10 18` reply carries the battery percentage as packed BCD
+at byte 11: `0x92` is 92%. The query was captured from the wireless configurator
+and does not change the keyboard's settings.
+
 ## Captured static-colour baseline
 
 ```text

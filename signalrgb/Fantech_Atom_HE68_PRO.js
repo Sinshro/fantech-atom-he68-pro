@@ -13,6 +13,17 @@ const PRODUCT_ID = 0x80CB;
 const VENDOR_USAGE_PAGE = 0xFF68;
 const TABLE_SIZE = 128;
 const REPORT_LENGTH = 65; // SignalRGB HID writes include the leading report ID 0.
+const BATTERY_UPDATE_INTERVAL = 360; // ~65 seconds at the wired plugin's ~5.5 FPS limit
+const BATTERY_QUERY_PAYLOAD = [
+    0xAA, 0x10, 0x18, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+];
 
 // [firmware RGB-table address, SignalRGB key name, x, y]
 // Known capture mapping: Tab=32, Q=33, W=34, E=35, R=36, T=37, Y=38.
@@ -48,6 +59,7 @@ const CUSTOM_MODE_PACKET = [
     0x80, 0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0x00, 0x00,
     0x01, 0x05, 0x04, 0x00, 0x00, 0x00, 0xAA, 0x55
 ].concat(new Array(40).fill(0));
+let renderCount = 0;
 
 export function Name() { return "Fantech Atom HE68 PRO (Unofficial)"; }
 export function Publisher() { return "HE68 community reverse-engineering project"; }
@@ -66,12 +78,17 @@ export function Validate(endpoint) {
 }
 
 export function Initialize() {
+    device.addFeature("battery");
+    battery.setBatteryState(battery.unknown);
+    updateBattery();
     // Observed official-software action: select Custom lighting mode.
     writePayload(CUSTOM_MODE_PACKET);
     drainResponse();
 }
 
 export function Render() {
+    renderCount += 1;
+    if (renderCount % BATTERY_UPDATE_INTERVAL === 0) updateBattery();
     const table = Array.from({ length: TABLE_SIZE }, () => [0, 0, 0]);
     for (const [address, , x, y] of LED_MAP) {
         table[address] = device.color(x, y);
@@ -122,4 +139,21 @@ function drainResponse() {
     // Custom-table writes have observed responses, but their semantics are not
     // decoded. Drain them non-blockingly so the endpoint cannot fill up.
     device.read([], REPORT_LENGTH, 0);
+}
+
+function updateBattery() {
+    // The wireless capture's 55 10 18 reply identifies keyboard PID 0x80CB,
+    // so use the same firmware query on the wired 64-byte HID endpoint.
+    writePayload(BATTERY_QUERY_PAYLOAD);
+    device.pause(15);
+    const response = device.read([], REPORT_LENGTH, 0);
+    const reportOffset = response[0] === 0x00 ? 1 : 0;
+    if (device.getLastReadSize() <= 0 ||
+        response[reportOffset] !== 0x55 ||
+        response[reportOffset + 1] !== 0x10 ||
+        response[reportOffset + 2] !== 0x18) return;
+
+    const encodedLevel = response[reportOffset + 11];
+    const level = ((encodedLevel >> 4) * 10) + (encodedLevel & 0x0F);
+    if (level >= 0 && level <= 100) battery.setBatteryLevel(level);
 }

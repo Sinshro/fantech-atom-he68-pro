@@ -18,6 +18,11 @@ from fantech_he68.custom_lighting import (
     blank_table,
     build_custom_frame,
 )
+from fantech_he68.protocol import (
+    BATTERY_QUERY_PACKET,
+    WIRELESS_REPORT_LENGTH as BATTERY_RESPONSE_LENGTH,
+    decode_battery_percentage,
+)
 
 VENDOR_ID = 0x0C45
 DONGLE_PRODUCT_ID = 0xFEFE
@@ -33,6 +38,7 @@ def parser() -> argparse.ArgumentParser:
     result.add_argument("--seconds", type=float, default=60.0, help="test duration (default: 60)")
     result.add_argument("--path", help="manual HIDAPI path")
     result.add_argument("--rapid-static", action="store_true", help="rapid full-keyboard colour switching (10 Hz)")
+    result.add_argument("--battery", action="store_true", help="read and print the captured battery percentage, then exit")
     return result
 
 
@@ -84,6 +90,33 @@ def _static_color_packet(red: int, green: int, blue: int) -> bytes:
     return bytes(packet)
 
 
+def _read_battery_percentage(device: object) -> int:
+    """Run the capture-verified wireless battery query without changing settings."""
+    # The receiver retains acknowledgements for prior Custom-lighting frames.
+    # Discard those stale 55 24 replies before issuing a request that needs its
+    # own 55 10 18 response.
+    for _ in range(256):
+        if not device.read(BATTERY_RESPONSE_LENGTH + 1, 0):
+            break
+    written = device.write(bytes((REPORT_ID,)) + BATTERY_QUERY_PACKET)
+    if written != WIRELESS_REPORT_LENGTH + 1:
+        raise RuntimeError(f"incomplete battery query: wrote {written}, expected {WIRELESS_REPORT_LENGTH + 1}")
+    deadline = time.monotonic() + 1.0
+    last_response = b""
+    while time.monotonic() < deadline:
+        remaining_ms = max(1, int((deadline - time.monotonic()) * 1_000))
+        raw = bytes(device.read(BATTERY_RESPONSE_LENGTH + 1, remaining_ms))
+        if not raw:
+            continue
+        if len(raw) == BATTERY_RESPONSE_LENGTH + 1 and raw[0] == REPORT_ID:
+            raw = raw[1:]
+        last_response = raw
+        if raw.startswith(bytes.fromhex("55 10 18")):
+            return decode_battery_percentage(raw)
+    detail = last_response.hex(" ").upper() if last_response else "no response"
+    raise RuntimeError(f"battery query timed out; last receiver response: {detail}")
+
+
 def main() -> int:
     args = parser().parse_args()
     if args.seconds <= 0:
@@ -100,7 +133,9 @@ def main() -> int:
     writes = 0
     frames = 0
     try:
-        if args.rapid_static:
+        if args.battery:
+            print(f"Battery: {_read_battery_percentage(device)}%")
+        elif args.rapid_static:
             print(f"Rapid static-colour test for {args.seconds:g}s at 10 Hz...", flush=True)
             colors = ((255, 0, 0), (0, 255, 0), (0, 80, 255), (255, 0, 180), (255, 255, 255))
             while time.monotonic() - started < args.seconds:

@@ -4,6 +4,13 @@
 
 const TABLE_SIZE = 128;
 const REPORT_LENGTH = 33; // leading report-ID zero + 32-byte payload
+const BATTERY_UPDATE_INTERVAL = 120; // ~70 seconds at the receiver's 1.7 FPS limit
+const BATTERY_QUERY_PAYLOAD = [
+    0xAA, 0x10, 0x18, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+];
 const CUSTOM_MODE_PAYLOAD = [
     0xAA,0x23,0x10,0x00,0x00,0x00,0x01,0x00,
     0x80,0xFF,0xFF,0xFF,0xFF,0x00,0x00,0x00,
@@ -17,6 +24,7 @@ const LED_MAP = [
     [64,"Left Shift",0,3],[65,"Z",2,3],[66,"X",3,3],[67,"C",4,3],[68,"V",5,3],[69,"B",6,3],[70,"N",7,3],[71,"M",8,3],[72,",",9,3],[73,".",10,3],[74,"/",11,3],[75,"Right Shift",12,3],[90,"Up Arrow",13,3],[108,"Page Down",14,3],
     [80,"Left Ctrl",0,4],[81,"Left Win",1,4],[82,"Left Alt",2,4],[83,"Space",7,4],[84,"Right Alt",9,4],[85,"Fn",10,4],[87,"Right Ctrl",11,4],[88,"Left Arrow",12,4],[89,"Down Arrow",13,4],[91,"Right Arrow",14,4]
 ];
+let renderCount = 0;
 
 export function Name() { return "Fantech Atom HE68 PRO Dongle (Unofficial)"; }
 export function Publisher() { return "HE68 community reverse-engineering project"; }
@@ -39,6 +47,9 @@ export function Validate(endpoint) {
 }
 
 export function Initialize() {
+    device.addFeature("battery");
+    battery.setBatteryState(battery.unknown);
+    updateBattery();
     // Effect 0x80 is the captured Custom-lighting mode selector. The RGB table
     // can be updated while another onboard effect remains visible, so activate
     // Custom explicitly whenever SignalRGB opens the receiver.
@@ -47,6 +58,8 @@ export function Initialize() {
 }
 
 export function Render() {
+    renderCount += 1;
+    if (renderCount % BATTERY_UPDATE_INTERVAL === 0) updateBattery();
     const table = Array.from({ length: TABLE_SIZE }, () => [0, 0, 0]);
     for (const [address, , x, y] of LED_MAP) table[address] = device.color(x, y);
     for (let start = 0; start < TABLE_SIZE; start += 6) {
@@ -74,3 +87,20 @@ export function Shutdown() { /* Preserve the last rendered Custom frame. */ }
 
 function writePayload(payload) { device.write([0].concat(payload), REPORT_LENGTH); }
 function drainResponse() { device.read([], REPORT_LENGTH, 0); }
+
+function updateBattery() {
+    // Captured from the wireless configurator during connection. Its matching
+    // 55 10 18 response places the charge in packed BCD at byte 11: 0x92 = 92%.
+    writePayload(BATTERY_QUERY_PAYLOAD);
+    device.pause(15);
+    const response = device.read([], REPORT_LENGTH, 0);
+    const reportOffset = response[0] === 0x00 ? 1 : 0;
+    if (device.getLastReadSize() <= 0 ||
+        response[reportOffset] !== 0x55 ||
+        response[reportOffset + 1] !== 0x10 ||
+        response[reportOffset + 2] !== 0x18) return;
+
+    const encodedLevel = response[reportOffset + 11];
+    const level = ((encodedLevel >> 4) * 10) + (encodedLevel & 0x0F);
+    if (level >= 0 && level <= 100) battery.setBatteryLevel(level);
+}
