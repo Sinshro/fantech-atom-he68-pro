@@ -14,6 +14,8 @@ const VENDOR_USAGE_PAGE = 0xFF68;
 const TABLE_SIZE = 128;
 const REPORT_LENGTH = 65; // SignalRGB HID writes include the leading report ID 0.
 const BATTERY_UPDATE_INTERVAL = 360; // ~65 seconds at the wired plugin's ~5.5 FPS limit
+const BATTERY_STATE_CHARGING = 2;
+const BATTERY_STATE_FULL = 4;
 const BATTERY_QUERY_PAYLOAD = [
     0xAA, 0x10, 0x18, 0x00, 0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -155,5 +157,10 @@ function updateBattery() {
 
     const encodedLevel = response[reportOffset + 11];
     const level = ((encodedLevel >> 4) * 10) + (encodedLevel & 0x0F);
-    if (level >= 0 && level <= 100) battery.setBatteryLevel(level);
+    if (level >= 0 && level <= 100) {
+        battery.setBatteryLevel(level);
+        // A valid reply on this endpoint means USB power is present. The packet
+        // has no proven charge flag, so derive the state from the wired transport.
+        battery.setBatteryState(level === 100 ? BATTERY_STATE_FULL : BATTERY_STATE_CHARGING);
+    }
 }

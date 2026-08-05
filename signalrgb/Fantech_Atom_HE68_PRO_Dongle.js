@@ -5,6 +5,8 @@
 const TABLE_SIZE = 128;
 const REPORT_LENGTH = 33; // leading report-ID zero + 32-byte payload
 const BATTERY_UPDATE_INTERVAL = 120; // ~70 seconds at the receiver's 1.7 FPS limit
+const BATTERY_STATE_DRAINING = 1;
+const BATTERY_STATE_FULL = 4;
 const BATTERY_QUERY_PAYLOAD = [
     0xAA, 0x10, 0x18, 0x00, 0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -102,5 +104,10 @@ function updateBattery() {
 
     const encodedLevel = response[reportOffset + 11];
     const level = ((encodedLevel >> 4) * 10) + (encodedLevel & 0x0F);
-    if (level >= 0 && level <= 100) battery.setBatteryLevel(level);
+    if (level >= 0 && level <= 100) {
+        battery.setBatteryLevel(level);
+        // The battery reply came through the 2.4 GHz receiver. The packet has
+        // no proven charge flag, so derive the state from the active transport.
+        battery.setBatteryState(level === 100 ? BATTERY_STATE_FULL : BATTERY_STATE_DRAINING);
+    }
 }

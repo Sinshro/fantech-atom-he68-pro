@@ -31,7 +31,10 @@ unresolved.
 The receiver accepts a 32-byte `AA 10 18` request (the remaining 29 bytes are
 zero). Its 32-byte `55 10 18` reply carries the battery percentage as packed BCD
 at byte 11: `0x92` is 92%. The query was captured from the wireless configurator
-and does not change the keyboard's settings.
+and does not change the keyboard's settings. No charge-state flag has been
+identified in this reply. The SignalRGB plugins therefore derive the displayed
+state from the active transport: Draining/Full on 2.4 GHz and Charging/Full on
+wired USB.
 
 ## Captured static-colour baseline
 
