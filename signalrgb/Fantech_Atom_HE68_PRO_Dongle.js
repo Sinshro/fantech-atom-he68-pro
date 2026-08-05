@@ -50,7 +50,7 @@ export function Validate(endpoint) {
 
 export function Initialize() {
     device.addFeature("battery");
-    battery.setBatteryState(battery.unknown);
+    battery.setBatteryState(BATTERY_STATE_DRAINING);
     updateBattery();
     // Effect 0x80 is the captured Custom-lighting mode selector. The RGB table
     // can be updated while another onboard effect remains visible, so activate
@@ -90,17 +90,36 @@ export function Shutdown() { /* Preserve the last rendered Custom frame. */ }
 function writePayload(payload) { device.write([0].concat(payload), REPORT_LENGTH); }
 function drainResponse() { device.read([], REPORT_LENGTH, 0); }
 
+function drainPendingResponses() {
+    for (let attempt = 0; attempt < 32; attempt += 1) {
+        device.read([], REPORT_LENGTH, 0);
+        if (device.getLastReadSize() <= 0) return;
+    }
+}
+
+function readBatteryResponse() {
+    for (let attempt = 0; attempt < 20; attempt += 1) {
+        const response = device.read([], REPORT_LENGTH, 0);
+        if (device.getLastReadSize() > 0) {
+            const reportOffset = response[0] === 0x00 ? 1 : 0;
+            if (response[reportOffset] === 0x55 &&
+                response[reportOffset + 1] === 0x10 &&
+                response[reportOffset + 2] === 0x18) return [response, reportOffset];
+        }
+        device.pause(5);
+    }
+    return null;
+}
+
 function updateBattery() {
     // Captured from the wireless configurator during connection. Its matching
     // 55 10 18 response places the charge in packed BCD at byte 11: 0x92 = 92%.
+    drainPendingResponses();
     writePayload(BATTERY_QUERY_PAYLOAD);
     device.pause(15);
-    const response = device.read([], REPORT_LENGTH, 0);
-    const reportOffset = response[0] === 0x00 ? 1 : 0;
-    if (device.getLastReadSize() <= 0 ||
-        response[reportOffset] !== 0x55 ||
-        response[reportOffset + 1] !== 0x10 ||
-        response[reportOffset + 2] !== 0x18) return;
+    const result = readBatteryResponse();
+    if (result === null) return;
+    const [response, reportOffset] = result;
 
     const encodedLevel = response[reportOffset + 11];
     const level = ((encodedLevel >> 4) * 10) + (encodedLevel & 0x0F);
